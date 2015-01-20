@@ -1,0 +1,10 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("network_analysis"
+ (filename . "/ssh:chimerasub00.umiacs.umd.edu:/chimerahomes/wenhoujx/brain_project/network_analysis/")
+ (front-context-string . "all_pair_IC_conn")
+ (rear-context-string . "92 Nov 11 08:07 ")
+ (position . 274))
+)
