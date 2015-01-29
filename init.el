@@ -1,3 +1,5 @@
+
+
 ;; add packages
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -25,9 +27,136 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-mode
 (require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-(setq org-log-done t)
+;; The following lines are always needed. Choose your own keys.
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode)) ; not needed since Emacs 22.2
+(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+
+;; (custom-set-variables
+;;   ;; custom-set-variables was added by Custom.
+;;   ;; If you edit it by hand, you could mess it up, so be careful.
+;;   ;; Your init file should contain only one such instance.
+;;   ;; If there is more than one, they won't work right.
+;;  '(auto-raise-tool-bar-buttons t t)
+;;  '(auto-resize-tool-bars t t)
+;;  '(calendar-week-start-day 1)
+;;  '(case-fold-search t)
+;;  '(current-language-environment "Latin-1")
+;;  '(default-input-method "latin-1-prefix")
+;;  '(normal-erase-is-backspace t)
+;;  '(org-agenda-files (quote ("$HOME/org/birthday.org" "$HOME/org/newgtd.org")))
+;;  '(org-agenda-ndays 7)
+;;  '(org-agenda-repeating-timestamp-show-all nil)
+;;  '(org-agenda-restore-windows-after-quit t)
+;;  '(org-agenda-show-all-dates t)
+;;  '(org-agenda-skip-deadline-if-done t)
+;;  '(org-agenda-skip-scheduled-if-done t)
+;;  '(org-agenda-sorting-strategy (quote ((agenda time-up priority-down tag-up) (todo tag-up))))
+;;  '(org-agenda-start-on-weekday nil)
+;;  '(org-agenda-todo-ignore-deadlines t)
+;;  '(org-agenda-todo-ignore-scheduled t)
+;;  '(org-agenda-todo-ignore-with-date t)
+;;  '(org-agenda-window-setup (quote other-window))
+;;  '(org-deadline-warning-days 7)
+;;  '(org-export-html-style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyles.css\">")
+;;  '(org-fast-tag-selection-single-key nil)
+;;  '(org-log-done (quote (done)))
+;;  '(org-refile-targets (quote (("newgtd.org" :maxlevel . 1) ("someday.org" :level . 2))))
+;;  '(org-reverse-note-order nil)
+;;  '(org-tags-column -78)
+;;  '(org-tags-match-list-sublevels nil)
+;;  '(org-time-stamp-rounding-minutes 5)
+;;  '(org-use-fast-todo-selection t)
+;;  '(org-use-tag-inheritance nil)
+;; )
+
+
+;; Highlight text chosen in with Mark region
+(transient-mark-mode t)
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; (setq org-log-done nil)
+;; (setq org-agenda-include-diary nil)
+;; (setq org-deadline-warning-days 7)
+;; (setq org-timeline-show-empty-dates t)
+;; (setq org-insert-mode-line-in-empty-file t)
+;; (setq org-default-notes-file (concat org-directory "/notes.org"))
+
+
+(define-key global-map "\C-cc" 'org-capture)
+
+
+(setq org-directory "~/org/")
+(setq org-default-notes-file "~/.notes")
+;; (setq remember-annotation-functions '(org-remember-annotation))
+;; (setq remember-handler-functions '(org-remember-handler))
+;; (add-hook 'remember-mode-hook 'org-remember-apply-template)
+
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+	 "* TODO %?\n  %i\n  %a")
+        ("j" "Journal" entry (file+datetree "~/org/journal.org")
+	 "* %?\nEntered on %U\n  %i\n  %a")))
+
+
+;; (define-key global-map [f8] 'remember)
+;; (define-key global-map [f9] 'remember-region)
+
+;; (setq org-agenda-exporter-settings
+;;       '((ps-number-of-columns 1)
+;;         (ps-landscape-mode t)
+;;         (htmlize-output-type 'css)))
+
+;; (setq org-agenda-custom-commands
+;; '(
+
+;; ("P" "Projects"   
+;; ((tags "PROJECT")))
+
+;; ("H" "Office and Home Lists"
+;;      ((agenda)
+;;           (tags-todo "OFFICE")
+;;           (tags-todo "HOME")
+;;           (tags-todo "COMPUTER")
+;;           (tags-todo "DVD")
+;;           (tags-todo "READING")))
+
+;; ("D" "Daily Action List"
+;;      (
+;;           (agenda "" ((org-agenda-ndays 1)
+;;                       (org-agenda-sorting-strategy
+;;                        (quote ((agenda time-up priority-down tag-up) )))
+;;                       (org-deadline-warning-days 0)
+;;                       ))))
+;; )
+;; )
+
+;; (defun gtd ()
+;;     (interactive)
+;;     (find-file "c:/charles/gtd/newgtd.org")
+;; )
+;; (global-set-key (kbd "C-c g") 'gtd)
+
+
+;; (add-hook 'org-agenda-mode-hook 'hl-line-mode)
+
+; org mode start - added 20 Feb 2006
+;; The following lines are always needed. Choose your own keys.
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ ;; Changes all yes/no questions to y/n type
+(fset 'yes-or-no-p 'y-or-n-p)
+
+(set-variable 'confirm-kill-emacs 'yes-or-no-p)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; update packages
@@ -62,25 +191,47 @@
 (global-set-key (kbd "C-c h") 'helm-command-prefix)
 (global-unset-key (kbd "C-x c"))
 
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
 
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+
+(setq helm-split-window-in-side-p           t ; open helm buffer
+                                        ; inside current window,
+                                        ; not occupy whole other
+                                        ; window
+      helm-move-to-line-cycle-in-source     t ; move to end or
+                                        ; beginning of source
+                                        ; when reaching top or
+                                        ; bottom of source.
+      helm-ff-search-library-in-sexp        t ; search for library in
+                                        ; `require' and
+                                        ; `declare-function'
+                                        ; sexp.
+      helm-scroll-amount 8 ; scroll 8 lines other window using M-<next>/M-<prior> 
       helm-ff-file-name-history-use-recentf t)
 
 (helm-mode 1)
+
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(helm-autoresize-mode t)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+(global-set-key (kbd "C-c h o") 'helm-occur)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
+
 
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
+
+
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
 
 
 
@@ -98,13 +249,13 @@
 
 
 
-					; Set cursor color to yellow, yellow is good.
+                                        ; Set cursor color to yellow, yellow is good.
 (set-cursor-color "#ffff00")
 
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-					; auctex setting
+                                        ; auctex setting
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
 ;; (load "preview-latex.el" nil t t)
@@ -148,11 +299,11 @@ there's no active region. to the ipython already open in another window"
   (interactive)
   (let (beg end)
     (if (region-active-p)
-	(setq beg (region-beginning) end (region-end))
+        (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (progn (copy-region-as-kill beg end)
-	   (execute-kbd-macro (symbol-function 'issue-ipython))
-	   )))
+           (execute-kbd-macro (symbol-function 'issue-ipython))
+           )))
 
 
 ;; (defun issue-ipython-region-or-line ()
@@ -187,7 +338,7 @@ there's no active region. to the ipython already open in another window"
   (interactive)
   (let (beg end)
     (if (region-active-p)
-	(setq beg (region-beginning) end (region-end))
+        (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
@@ -422,3 +573,5 @@ Including indent-buffer, which should not be called automatically on save."
 ;; Start a regular shell if you prefer that.
 (global-set-key (kbd "C-x M-m") 'shell)
 ;; -------------------------------------------------------
+(global-set-key [(C-f5)] 'compile)
+(global-set-key [(f5)] 'recompile)
