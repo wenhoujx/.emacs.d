@@ -4,9 +4,9 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/org/gtd.org")
- (front-context-string . "** TODO LC, to u")
- (rear-context-string . "emp = abs(x);]]\n")
- (position . 2894))
+ (front-context-string . "** TODO median o")
+ (rear-context-string . "n of all words \n")
+ (position . 2975))
 ("network_analysis"
  (filename . "/ssh:chimerasub00.umiacs.umd.edu:/chimerahomes/wenhoujx/brain_project/network_analysis/")
  (front-context-string . "all_pair_IC_conn")
