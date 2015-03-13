@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/interview/" "~/master_thesis/" "/ssh:chimerasub00.umiacs.umd.edu:/chimerahomes/wenhoujx/brain_project/" "~/interview/cracking150_try1/")
+("~/.emacs.d/" "~/master_thesis/" "~/guava/" "~/essential_java/" "/ssh:chimerasub00.umiacs.umd.edu:/chimerahomes/wenhoujx/brain_project/" "~/interview/" "~/interview/cracking150_try1/")

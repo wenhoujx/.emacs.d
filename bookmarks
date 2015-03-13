@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("org-capture-last-stored"
+(("thesis_WH_01"
+ (filename . "~/master_thesis/thesis_WH_01/")
+ (front-context-string . "Chapter3.tex\n  -")
+ (rear-context-string . "05 Feb 23 14:14 ")
+ (position . 2479))
+("paper_writing"
+ (filename . "~/master_thesis/paper_writing/")
+ (front-context-string . "svglov3.clo\n  -r")
+ (rear-context-string . "60 Mar 11 21:33 ")
+ (position . 650))
+("org-capture-last-stored"
  (filename . "~/org/gtd.org")
  (front-context-string . "** TODO median o")
  (rear-context-string . "n of all words \n")
