@@ -23,7 +23,7 @@
 (provide 'secrets)
 
 
-
+(setq-default fill-column 100)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; org-mode
 (require 'org)
